@@ -1,0 +1,16 @@
+insert into Feriado (id,data,tipo,descricao) values(1, {ts '2015-01-01 00:00:00'},'feriado nacional','Confraternização universal');
+insert into Feriado (id,data,tipo,descricao) values(2, {ts '2015-02-20 00:00:00'},'ponto facultativo', 'Carnaval');
+insert into Feriado (id,data,tipo,descricao) values(3, {ts '2015-02-21 00:00:00'},'ponto facultativo','Carnaval');
+insert into Feriado (id,data,tipo,descricao) values(4, {ts '2015-02-22 00:00:00'},'ponto facultativo até as 14 horas','Quarta-feira de Cinzas');
+insert into Feriado (id,data,tipo,descricao) values(5, {ts '2015-04-06 00:00:00'},'ponto facultativo','Paixão de Cristo');
+insert into Feriado (id,data,tipo,descricao) values(6, {ts '2015-04-21 00:00:00'},'feriado nacional','Tiradentes');
+insert into Feriado (id,data,tipo,descricao) values(7, {ts '2015-05-01 00:00:00'},'feriado nacional','Dia Mundial do Trabalho');
+insert into Feriado (id,data,tipo,descricao) values(8, {ts '2015-06-07 00:00:00'},'ponto facultativo','Corpus Christi');
+insert into Feriado (id,data,tipo,descricao) values(9, {ts '2015-09-07 00:00:00'},'feriado nacional','Independência do Brasil');
+insert into Feriado (id,data,tipo,descricao) values(10,{ts '2015-10-12 00:00:00'},'feriado nacional','Nossa Senhora Aparecida');
+insert into Feriado (id,data,tipo,descricao) values(11,{ts '2015-10-28 00:00:00'},'ponto facultativo','Dia do Servidor Público');
+insert into Feriado (id,data,tipo,descricao) values(12,{ts '2015-11-02 00:00:00'},'feriado nacional','Finados');
+insert into Feriado (id,data,tipo,descricao) values(13,{ts '2015-11-15 00:00:00'},'feriado nacional','Proclamação da República');
+insert into Feriado (id,data,tipo,descricao) values(14,{ts '2015-12-24 00:00:00'},'ponto facultativo','Véspera do Natal');
+insert into Feriado (id,data,tipo,descricao) values(15,{ts '2015-12-25 00:00:00'},'feriado nacional','Natal');
+insert into Feriado (id,data,tipo,descricao) values(16,{ts '2015-12-31 00:00:00'},'ponto facultativo','Véspera do Natal');
