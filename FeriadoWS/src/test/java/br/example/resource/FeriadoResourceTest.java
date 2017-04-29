@@ -6,6 +6,7 @@ import static org.junit.Assert.*;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.ws.rs.core.MediaType;
@@ -252,5 +253,45 @@ public class FeriadoResourceTest {
 		
 		verify(feriadoService).removerTodosOsFeriados();
 		verifyNoMoreInteractions(feriadoService);
+ 	}
+ 	
+ 	@Test
+ 	public void shouldReturnTrueIfDateIsFeriadoOrSabadoOrDomingo() throws Exception{
+ 		
+ 		Feriado feriadoMock = FeriadosMock.getFeriado();
+		when(feriadoService.buscarFeriadoPorData(any(Date.class))).thenReturn(feriadoMock);
+		
+		MvcResult result = mockMvc
+				.perform(MockMvcRequestBuilders.get(URL + "/isFeriado/{id}", "2015-01-01T00:00:00")
+				.accept(MediaType.APPLICATION_JSON))
+				.andExpect(MockMvcResultMatchers.status().isOk()) //Verifica Status
+				.andReturn();
+		
+		verify(feriadoService).buscarFeriadoPorData(any(Date.class));
+		verifyNoMoreInteractions(feriadoService);
+		
+		Boolean dataIsFeriado = new Gson().fromJson(result.getResponse().getContentAsString(),Boolean.class); 
+ 		
+		assertNotNull(dataIsFeriado);
+		assertTrue(dataIsFeriado);
+ 	}
+ 	@Test
+ 	public void shouldReturnFalseIfDateIsNotFeriado() throws Exception{
+ 		
+ 		when(feriadoService.buscarFeriadoPorData(any(Date.class))).thenReturn(null);
+ 		
+ 		MvcResult result = mockMvc
+ 				.perform(MockMvcRequestBuilders.get(URL + "/isFeriado/{id}", "2015-01-01T00:00:00")
+ 						.accept(MediaType.APPLICATION_JSON))
+ 				.andExpect(MockMvcResultMatchers.status().isNotFound())
+ 				.andReturn();
+ 		
+ 		verify(feriadoService).buscarFeriadoPorData(any(Date.class));
+ 		verifyNoMoreInteractions(feriadoService);
+ 		
+ 		Boolean dataIsFeriado = new Gson().fromJson(result.getResponse().getContentAsString(),Boolean.class); 
+ 		
+ 		assertNotNull(dataIsFeriado);
+ 		assertFalse(dataIsFeriado);
  	}
 }

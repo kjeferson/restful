@@ -18,6 +18,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 import br.example.model.Feriado;
 import br.example.service.FeriadoService;
 import br.example.util.CustomErrorType;
+import br.example.util.FeriadoUtil;
+
 import static br.example.util.FeriadoUtil.*;
 
 @RestController
@@ -105,6 +107,29 @@ public class FeriadoResource {
 
 		feriadoService.removerTodosOsFeriados();
 		return new ResponseEntity<Feriado>(HttpStatus.NO_CONTENT);
+	}
+	
+	@RequestMapping(value = "/feriados/isFeriado/{data}", method = RequestMethod.GET)
+	public ResponseEntity<Boolean> isFeriado(@PathVariable("data") String data){
+		logger.info("Verificando se a data {} é feriado, sabado ou domingo", data);
+		Feriado feriadoResult = feriadoService.buscarFeriadoPorData(FeriadoUtil.stringToDateIso8601Format(data));
+		
+		if(feriadoResult == null){
+
+			if(FeriadoUtil.dateIsSaturday(data)){
+				logger.info("A data {} é sabado", data);
+				return new ResponseEntity<Boolean>(true,HttpStatus.OK);
+			}
+			else if(FeriadoUtil.dateIsSunday(data)){
+				logger.info("A data {} é domingo", data);
+				return new ResponseEntity<Boolean>(true,HttpStatus.OK);
+			}
+			logger.info("A data {} não é sabado/domingo/feriado", data);
+			return new ResponseEntity<Boolean>(false,HttpStatus.NOT_FOUND);
+		}
+		
+		logger.info("A data {} é feriado", data);
+		return new ResponseEntity<Boolean>(true,HttpStatus.OK);
 	}
 
 }
